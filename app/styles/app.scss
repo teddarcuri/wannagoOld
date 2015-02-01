@@ -1,6 +1,8 @@
 // Bourbon
 @import "bower_components/bourbon/app/assets/stylesheets/bourbon.scss";
 
+// Config
+@import "config/variables";
 // Layout
 @import "layout/global";
 @import "layout/control-panel";
@@ -8,3 +10,4 @@
 
 // Components
 @import "components/map";
+@import "components/forms";

@@ -1,17 +1,23 @@
 <div id="app-container">
-	<div id="control-panel">
-		<header>
-			<img id="logo" src="images/logo.svg" alt="" />	
 
-			<div class="btn--add-location">
-				+
-			</div>	
-		</header>
+	<header>
+		<img id="logo" src="images/logo.svg" alt="" />	
 
-		{{outlet}}
+		<div class="btn--add-location btn">
+			+
+		</div>	
+		<div class="btn--options btn">
 		
-	</div>
-	<div id="map-canvas">
+			<ul>
+				<li>My Destinations</li>
+				<li>Settings</li>
+				<li>Logout</li>
+			</ul>
+		</div>	
+	</header>
+
+	<div id="main-content">
+			{{outlet}}
 	</div>
 </div>	
 
