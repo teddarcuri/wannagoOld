@@ -4,6 +4,10 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 var app = new EmberApp();
 
+// Broccoli Sass
+var compileSass = require('broccoli-sass');
+var Sass = compileSass([], 'app/styles/app.scss', 'public/assets/styles/app.css');
+
 // Use `app.import` to add additional libraries to the generated
 // output files.
 //
@@ -17,4 +21,4 @@ var app = new EmberApp();
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
 
-module.exports = app.toTree();
+module.exports = app.toTree(Sass);
