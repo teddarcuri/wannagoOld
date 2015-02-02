@@ -1,13 +1,33 @@
-<div id="map-canvas"></div>
-
-<div id="control-panel">
+<div id="control-panel" class="left">
+	<div class="btn--layout-ctrl-pnl">
+		
+	</div>
+	<div class="btn--close-ctrl-pnl">
+		x
+	</div>
 	<form action="">
-		<h1>New Destination</h1>
-		<input type="text"><br>
-		<input type="text"><br>
-		<input type="text"><br>
-		<input type="button" value="Create Location">
+		<div class="header-image"></div>
+		<div class="padded has-header-image">
+			<h1>New Destination</h1>
+			<h3>Name</h3>
+			<input type="text"><br>
+			<h3>Location</h3>
+			<input type="text"><br>
+			<h3>Resources</h3>
+			<textarea></textarea><br>
+			<h3>Resources</h3>
+			<textarea></textarea><br>
+			<h3>Resources</h3>
+			<textarea></textarea><br>
+			<h3>Resources</h3>
+			<textarea></textarea><br>
+			<h3>Resources</h3>
+			<textarea></textarea><br>
+			<input type="button" value="Create Location">
+		</div>
 	</form>
-</div>		
+</div>
+
+<div id="map-canvas"></div>		
 
 {{outlet}}

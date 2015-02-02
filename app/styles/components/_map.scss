@@ -1,6 +1,10 @@
 #map-canvas {
-	background: #ddd;
+	background: #333;
 	width: 100%; height: 100%;
 	position: relative;
 	@include flex(1);
+	@include order(2);
+	@include bp($bp-med){
+		@include order(1);
+	};
 }

@@ -1,10 +1,108 @@
 #control-panel {
 	width: 0px; height: 100%;
-	background:  #fff;
+	background:  #eee;
 	z-index: 98;
 	box-shadow: $shadow;
+	position: relative;
 	@include transition(all ease 0.75s);
-	&.expanded {
-		width: 30%;
+	@include order(3);
+
+	// Hide all children because we fade them in with javascript
+	& > * {
+		display: none; 
 	}
-}
+
+	// Expanded Control Panel
+	&.expanded {
+		width: 33%;
+		min-width: 300px;
+	}
+
+	// Right Sidebar
+	&.right {
+		@include order(3);
+		.btn--layout-ctrl-pnl {
+			background: url('../images/icons/left-sidebar-icon.svg') no-repeat center center #111;
+			background-size: 20px;
+			&:hover {
+				background: url('../images/icons/left-sidebar-icon.svg') no-repeat center center $red;
+				background-size: 20px;
+			}
+		}
+	}
+
+	// Left Sidebar
+	&.left {
+		@include order(1);
+		.btn--layout-ctrl-pnl {
+			background: url('../images/icons/right-sidebar-icon.svg') no-repeat center center #111;
+			background-size: 20px;
+			&:hover {
+				background: url('../images/icons/right-sidebar-icon.svg') no-repeat center center $red;
+				background-size: 20px;
+			}
+		}
+	}
+
+	// Wiggle animation when expand button is clicked and panel is already expanded
+	&.wiggle {
+		margin-top: -20px;
+	}
+
+	// Buttons
+	.btn--close-ctrl-pnl {
+		position: absolute;
+		right: 0; top: 0;
+		padding: 10px 16px;
+		background: #111;
+		color: #fff;
+		z-index: 99;
+		&:hover {
+			background: $red;
+			cursor: pointer;
+		}
+	}
+
+	.btn--layout-ctrl-pnl {
+		position: absolute;
+		right: 45px; top: 0;
+		height: 40px; width: 40px;
+		color: #fff;
+		z-index: 99;
+		&:hover {
+			cursor: pointer;
+		}
+		@include bp($bp-med) {
+			display: none !important;
+		}
+	}
+
+
+	// Media Queries
+	@include bp($bp-med) {
+		height: 0%;
+		width: 100%;
+		@include order(2 !important);
+		&.expanded {
+			overflow: auto;
+			height: 60%;
+			width: 100%;
+		}
+		&.wiggle {
+			margin-top: 0px;
+			height: 65%;
+		}
+	}
+
+	@include bp($bp-small) {
+		&.expanded {
+			height: 70%;
+		}
+		&.wiggle {
+			margin-top: 0px;
+			height: 75%;
+		}
+	}
+
+
+} 

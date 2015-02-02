@@ -4,13 +4,55 @@ export default Ember.View.extend({
 	didInsertElement : function(){
 		Ember.run.schedule('afterRender', this, function(){
 
+			var $ctrlpnl = $("#control-panel"); // Control Panel
+
 			// Show Control Panel
 			function showControlPanel() {
-				$("#control-panel").toggleClass("expanded");
+
+				if( $ctrlpnl.hasClass("expanded") ) {
+					$ctrlpnl.addClass("wiggle");
+					setTimeout(function(){
+						$ctrlpnl.removeClass("wiggle");
+					}, 400);
+				} else {
+						$ctrlpnl.addClass("expanded");
+					setTimeout(function(){
+						$ctrlpnl.children().fadeIn();
+					}, 400);
+				}
 			}
 
+			// Close Control Panel
+			function hideControlPanel() {
+				$ctrlpnl.children().fadeOut();
+				setTimeout(function(){
+					$ctrlpnl.removeClass("expanded");
+				}, 300);
+			}
+
+			// Open
 			$(".btn--add-location").on("click", function() {
-				showControlPanel();
+					showControlPanel();
+			});
+
+			// Close
+			$(".btn--close-ctrl-pnl").on("click", function() {
+					hideControlPanel();
+			});
+
+			// Changes Control Panel Side
+
+			function switchPanelSide() {
+				var btn = $(this);
+				if ( $ctrlpnl.hasClass("left") ) {
+					$ctrlpnl.removeClass("left").addClass("right");
+				} else {
+					$ctrlpnl.removeClass("right").addClass("left");
+				}
+			}
+
+			$(".btn--layout-ctrl-pnl").on("click", function() {
+					switchPanelSide();
 			});
 
 			/////////////////////////
@@ -24,8 +66,8 @@ export default Ember.View.extend({
 			 
 			  // Options
         	  var mapOptions = {
-	          center: { lat: 28.274790, lng: 4.011689},
-	          zoom: 3,
+	          center: { lat: 38.700707, lng: -101.451547},
+	          zoom: 4,
 	          styles: styles,
 	          mapTypeControlOptions: {
 			        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
@@ -39,7 +81,9 @@ export default Ember.View.extend({
 
 	      google.maps.event.addDomListener(window, 'load', initialize);
 
-	      // Three JS
+	   /////////////
+	   // Three JS
+	   /////////////
 		var camera, scene, renderer, cube, material, mesh;
 
 		init();
@@ -79,8 +123,6 @@ export default Ember.View.extend({
 		    
 
 		}
-
-
 
 		function animate() {
 		  requestAnimationFrame(animate);

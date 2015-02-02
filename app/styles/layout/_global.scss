@@ -13,8 +13,14 @@ ul, li {
 	height: 100%; width: 100%;
 	position: absolute;
 	left: 0; top: 0;
-	padding-top: 90px;
+	padding-top: $header-height;
 	@include display(flex);
+	@include bp($bp-med) {
+		@include flex-direction(column);
+	}
+	@include bp($bp-small){
+		padding-top: $header-height-small;
+	}
 }
 
 #main-content {
