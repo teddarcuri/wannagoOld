@@ -1,33 +1,111 @@
 <div id="control-panel" class="left">
-	<div class="btn--layout-ctrl-pnl">
-		
-	</div>
 	<div class="btn--close-ctrl-pnl">
 		x
 	</div>
+
+	<div class="btn--layout-ctrl-pnl">
+		
+	</div>
 	<form action="">
-		<div class="header-image"></div>
+		<div class="header-image">
+		</div>
+		<input type="hidden">
 		<div class="padded has-header-image">
+
 			<h1>New Destination</h1>
-			<h3>Name</h3>
-			<input type="text"><br>
-			<h3>Location</h3>
-			<input type="text"><br>
+			
+			<input type="text" placeholder="Destination Name" id="destination">
+			
+			<select name="trip" id="">
+				<option value="">Trip</option>
+				<option value="">Trip</option>
+				<option value="">Trip</option>
+				<option value="">Trip</option>
+			</select>
 			<h3>Resources</h3>
-			<textarea></textarea><br>
+			<textarea></textarea>
 			<h3>Resources</h3>
-			<textarea></textarea><br>
+			<textarea></textarea>
 			<h3>Resources</h3>
-			<textarea></textarea><br>
+			<textarea></textarea>
 			<h3>Resources</h3>
-			<textarea></textarea><br>
+			<textarea></textarea>
 			<h3>Resources</h3>
-			<textarea></textarea><br>
-			<input type="button" value="Create Location">
+			<textarea></textarea>
+			<input type="button" value="Create Destination">
 		</div>
 	</form>
 </div>
 
-<div id="map-canvas"></div>		
+<div id="panel">
+    <input id="address" type="textbox" placeholder="Search">
+    <input type="button" value=" " id="btn--submit-geocode">
+    <div class="geocode-container">
+	    <div class="geocode-results">
+	    	<span class="results-header">
+	    		Search by city, state, attraction, etc...
+	    	</span>
+	    </div>
+	    <div class="geocode-suggestions">
+	    </div>
+    </div>
+</div>
+
+<div id="map-container">
+		<div id="theme-drawer">
+			<ul>
+				<li class="btn--colorful-theme active theme-toggle">
+					<img src="images/themes/theme-colorful.jpg" alt="">
+					<span class="theme-name">
+						Colorful Map
+					</span>
+				</li>
+				<li class="btn--neutral-theme theme-toggle">
+					<img src="images/themes/theme-neutral.jpg" alt="">
+					<span class="theme-name">
+						Neutral Map
+					</span>
+				</li>
+				<li class="btn--dark-theme theme-toggle">
+					<img src="images/themes/theme-dark.jpg" alt="">
+					<span class="theme-name">
+						Dark Map
+					</span>
+				</li>
+				<li class="btn--light-theme theme-toggle">
+					<img src="images/themes/theme-light.jpg" alt="">
+					<span class="theme-name">
+						Light Map
+					</span>
+				</li>
+
+			</ul>
+			
+			<div class="btn--close-theme-drawer">
+				x
+			</div>
+	   </div>
+	   <div id="map-canvas">
+
+		</div>
+
+		<div id="preferences-drawer">
+			<h1>Preferences</h1>
+			<form action="">
+				<input type="text">
+				<input type="text">
+				<input type="text">
+				<input type="text">
+				<input type="text">
+				<input type="text">
+				<input type="text">
+				<input type="text">
+				<input type="text">
+				<input type="text">
+			</form>
+		</div>
+
+</div>
+
 
 {{outlet}}

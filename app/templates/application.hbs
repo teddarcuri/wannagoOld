@@ -1,23 +1,32 @@
 <div id="app-container">
 
 	<header>
-		<img id="logo" src="images/logo.svg" alt="" />	
-
+	
+		<a href="/">
+			<img id="logo" src="images/logo.svg" alt="" />	
+		</a>
 		<div class="btn--add-location btn">
+			<span>Add Destination</span>
 		</div>	
+
 		<div class="btn--options btn">
-		
+			<span>Preferences</span>
 			<ul>
 				<li>My Destinations</li>
-				<li>Settings</li>
+				<li>Preferences</li>
 				<li>Logout</li>
 			</ul>
-		</div>	
+		</div>
+		<div class="btn--themes btn">
+			<span>Map Themes</span>
+		</div>
 	</header>
 
 	<div id="main-content">
 			{{outlet}}
 	</div>
+
+
 </div>	
 
 

@@ -1,0 +1,18 @@
+#preferences-drawer	 {
+	width: 100%; height: 0px;
+	background: #ddd;
+	position: relative;
+	z-index: 1000;
+	box-shadow: $shadow;
+	z-index: 90;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
+	@include linear-gradient(top, #fff, #ccc);
+	@include transition(all ease 1s);
+	@include order(3);
+
+	&.expanded {
+		height: 80%;
+	}
+}

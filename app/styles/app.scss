@@ -4,11 +4,14 @@
 // Config
 @import "config/mixins";
 @import "config/variables";
+@import "config/typography";
 
 // Layout
 @import "layout/global";
 @import "layout/control-panel";
 @import "layout/header";
+@import "layout/theme-drawer";
+@import "layout/preferences-drawer";
 
 // Components
 @import "components/map";

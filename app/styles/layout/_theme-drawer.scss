@@ -1,0 +1,69 @@
+#theme-drawer	 {
+	width: 100%; height: 0px;
+	background: #444;
+	position: relative;
+	z-index: 1000;
+	box-shadow: $shadow;
+	z-index: 90;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
+	@include transition(all ease 1s);
+	@include order(1);
+
+	&.expanded {
+		height: 150px;
+	}
+
+	ul {
+		position: relative;
+		height: 150px; width: 100%;
+		overflow-x: scroll;
+		overflow-y: hidden;
+		li {
+			display: inline-block;
+			padding: 10px;
+			position: relative;
+			height: 150px; width: 200px;
+			margin: auto; 
+			cursor: pointer;
+			&.active {
+				background: #333;
+				.theme-name {
+					background: $green;
+				}
+			}
+			&:hover {
+				background: #333;
+				.theme-name {
+					background: $green;
+				}
+			}
+			img {
+				width: 100%;
+				border: solid 5px #333;
+			}
+			.theme-name {
+				color: #fff;
+				margin-top: 0px;
+				padding: 10px;
+				display: block;
+				text-align: center;
+				background: #333;
+			}
+		}
+	}
+
+	// Buttons
+	.btn--close-theme-drawer {
+		position: absolute;
+		padding: 10px 16px;
+		background: $red;
+		color: #fff;
+		right: 0px; top: 0px;
+		&:hover {
+			background: darken($red, 10%);
+			cursor: pointer;
+		}
+	}
+}

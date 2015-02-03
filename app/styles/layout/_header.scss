@@ -4,6 +4,7 @@ header {
 	position: absolute;
 	top: 0;
 	z-index: 99;
+	box-shadow: $shadow;
 	@include bp($bp-small){
 		height: $header-height-small;
 	}
@@ -28,25 +29,45 @@ header {
 	float: left;
 	margin-right: 5px;
 	@include bp($bp-small){
-		width: 75px;
+		width: 60px;
 		float: right;
+		span {
+			display: none;
+		}
 	}
 	&:hover {
 		cursor: pointer;
 		background: $green;
 		color: #fff;
-		ul {
+		span {
 			display: block;
+			z-index: 105;
 		}
 	}
+
+	span {
+		color: #333;
+		font-size: 0.7em;
+		text-align: center;
+		display: none;
+		position: absolute;
+		top: 100%; right: 0;
+		padding: 7px;
+		width: 100%;
+		color: #fff;
+		background: darken($green, 10%);
+	}
+
 	ul {
-		background: #222;
+		background: #fff;
 		width: 300px; 
 		position: absolute;
 		top: $header-height;
 		text-align: left;
 		display: none;
+		color: #333;
 		box-shadow: $shadow;
+		font-size: 2.75em;
 		@include bp($bp-small){
 			position: fixed;
 			top: $header-height-small;
@@ -55,13 +76,12 @@ header {
 		}
 		li {
 			font-size: 0.33em;
-			color: #fff;
+			color: #333;
 			line-height: 1.5em;
 			padding: 15px;
-			border-bottom: solid 1px #333;
+			border-bottom: solid 1px #ddd;
 			&:hover {
-				background: $green;
-				color: #eee;
+				background: #eee;
 			}
 			&:last-child {
 				border: none;
@@ -83,16 +103,37 @@ header {
 	}
 }
 
+.btn--themes {
+	background: url('../images/icons/themes-icon.svg') no-repeat center center #000;
+	background-size: 30px;
+	&:hover {
+		cursor: pointer;
+		background: url('../images/icons/themes-icon-white.svg') no-repeat center center $green;
+		background-size: 30px;
+	}
+}
+
 .btn--options {
 	background: url('../images/icons/gear-icon.svg') no-repeat center center #000;
 	background-size: 30px;
-	font-size: 2.75em;
+	.theme-toggle {
+		position: relative;
+		&.active {
+			&:before {
+				content: "";
+				padding: 4px;
+				border-radius: 200%;
+				background: $green;
+				position: absolute;
+				right: 20px; top: 43%;
+			}
+		}
+	}
+
 	&:hover {
 		cursor: pointer;
 		background: url('../images/icons/gear-icon-white.svg') no-repeat center center $green;
 		background-size: 30px;
-		ul {
-			display: block;
-		}
+
 	}
 }

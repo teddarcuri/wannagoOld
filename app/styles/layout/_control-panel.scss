@@ -1,6 +1,6 @@
 #control-panel {
 	width: 0px; height: 100%;
-	background:  #eee;
+	background:  #222;
 	z-index: 98;
 	box-shadow: $shadow;
 	position: relative;
@@ -24,10 +24,17 @@
 		.btn--layout-ctrl-pnl {
 			background: url('../images/icons/left-sidebar-icon.svg') no-repeat center center #111;
 			background-size: 20px;
+			border-radius: 0px 7px 0px 0px;
+			top: $header-image-height - 40px; left: 0px; 
 			&:hover {
-				background: url('../images/icons/left-sidebar-icon.svg') no-repeat center center $red;
+				background: url('../images/icons/left-sidebar-icon.svg') no-repeat center center $green;
 				background-size: 20px;
+				cursor: pointer;
 			}
+		}
+		.btn--close-ctrl-pnl {
+			top: 0px; left: 0px;
+			border-radius: 0px 0px 7px 0px;
 		}
 	}
 
@@ -37,10 +44,16 @@
 		.btn--layout-ctrl-pnl {
 			background: url('../images/icons/right-sidebar-icon.svg') no-repeat center center #111;
 			background-size: 20px;
+			border-radius: 7px 0px 0px 0px;
+			top: $header-image-height - 40px; right: 0px;
 			&:hover {
-				background: url('../images/icons/right-sidebar-icon.svg') no-repeat center center $red;
+				background: url('../images/icons/right-sidebar-icon.svg') no-repeat center center $green;
 				background-size: 20px;
 			}
+		}
+		.btn--close-ctrl-pnl {
+			top: 0px; right: 0px;
+			border-radius: 0px 0px 0px 7px;
 		}
 	}
 
@@ -52,7 +65,6 @@
 	// Buttons
 	.btn--close-ctrl-pnl {
 		position: absolute;
-		right: 0; top: 0;
 		padding: 10px 16px;
 		background: #111;
 		color: #fff;
@@ -65,7 +77,6 @@
 
 	.btn--layout-ctrl-pnl {
 		position: absolute;
-		right: 45px; top: 0;
 		height: 40px; width: 40px;
 		color: #fff;
 		z-index: 99;
