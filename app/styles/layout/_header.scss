@@ -18,7 +18,7 @@ header {
 	display: inline-block;
 	float: left;
 	@include bp($bp-small){
-		padding: 20px 20px;
+		padding: 16px 10px;
 	}
 }
 
