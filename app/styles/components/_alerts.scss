@@ -1,0 +1,22 @@
+#alert-bar {
+	bottom: -100%; 
+	left: 0;
+	position: fixed;
+	width: 100%; height: auto;
+	padding: 20px;
+	background: $red;
+	z-index: 120;
+	color: #fff;
+	@include transition(all ease 0.7s);
+	&.active {
+		bottom: 0px;
+	}
+
+	&.alert {
+		background: $red;
+	}
+
+	&.notification {
+		background: $green;
+	}
+}
