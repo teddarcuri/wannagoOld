@@ -1,5 +1,6 @@
 // Bourbon
 @import "bower_components/bourbon/app/assets/stylesheets/bourbon.scss";
+@import "bower_components/neat/app/assets/stylesheets/neat.scss";
 
 // Config
 @import "config/mixins";
@@ -16,3 +17,4 @@
 // Components
 @import "components/map";
 @import "components/forms";
+@import "components/alerts";

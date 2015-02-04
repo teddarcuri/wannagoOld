@@ -3,12 +3,18 @@ form {
 	position: relative;
 	overflow: auto;
 	height: 100%; width: 100%;
+	@include outer-container();
+
+	&::-webkit-scrollbar {
+ 		display: none;
+	}
 
 	.padded {
 		padding: 20px;
+		@include outer-container();
 	}
 
-	input {
+	input, select {
 		display: block;
 		height: 50px;
 		width: 100%;
@@ -17,6 +23,13 @@ form {
 		border: solid 1px #eee;
 		padding: 3px;
 		font-size: 1.25em;
+		margin-bottom: 20px;
+		&.half {
+			@include span-columns(6);
+			&:nth-child(2n+2) {
+				@include omega();
+			}
+		}
 	}
 
 	input[type="button"] {
