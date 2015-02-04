@@ -1,5 +1,5 @@
 <div id="control-panel" class="left">
-	<div class="btn--close-ctrl-pnl">
+	<div id="btn--close-ctrl-pnl" class="btn--close-ctrl-pnl">
 		x
 	</div>
 
@@ -11,27 +11,28 @@
 		</div>
 		<input type="hidden">
 		<div class="padded has-header-image">
-
-			<h1>New Destination</h1>
 			
-			<input type="text" placeholder="Destination Name" id="destination">
+			<input type="text" placeholder="Destination Name*" id="destination" class="half">
+			<input type="text" placeholder="Lat, Lng" id="destination" class="half">
+			<select class="half" name="trip" id="">
+				<option value="">Desire level</option>
+				<option value="">It'd be nice</option>
+				<option value="">I really want to go</option>
+				<option value="">I can't not go</option>
+				<option value="">Bucketlist</option>
+			</select>
 			
-			<select name="trip" id="">
+			<select class="half" name="trip" id="">
 				<option value="">Trip</option>
 				<option value="">Trip</option>
 				<option value="">Trip</option>
 				<option value="">Trip</option>
 			</select>
-			<h3>Resources</h3>
+			<h3>Description</h3>
 			<textarea></textarea>
-			<h3>Resources</h3>
+			<h3>What's here?</h3>
 			<textarea></textarea>
-			<h3>Resources</h3>
-			<textarea></textarea>
-			<h3>Resources</h3>
-			<textarea></textarea>
-			<h3>Resources</h3>
-			<textarea></textarea>
+			
 			<input type="button" value="Create Destination">
 		</div>
 	</form>
@@ -62,6 +63,13 @@
 					<img src="images/themes/theme-light.jpg" alt="">
 					<span class="theme-name">
 						Light Map
+					</span>
+				</li>
+
+				<li class="btn--satellite-theme theme-toggle">
+					<img src="images/themes/theme-satellite.jpg" alt="">
+					<span class="theme-name">
+						Satellite Mode
 					</span>
 				</li>
 

@@ -41,6 +41,8 @@ export default Ember.View.extend({
 						$ctrlpnl.children().fadeIn();
 					}, 400);
 				}
+
+				google.maps.event.trigger(map, "resize");
 			} // end show control panel
 
 			// Close Control Panel
@@ -51,11 +53,6 @@ export default Ember.View.extend({
 				}, 300);
 			} // end close control panel
 
-			// Open
-			$(".btn--add-location").on("click", function() {
-					showControlPanel();
-					map.setCenter(center);
-			}); // end open
 
 			// Close
 			$(".btn--close-ctrl-pnl").on("click", function() {
@@ -126,10 +123,7 @@ export default Ember.View.extend({
 	          center: latlng,
 	          zoom: 3,
 	          styles: themeColorful,
-	          mapTypeControlOptions: {
-			        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-			        position: google.maps.ControlPosition.BOTTOM_CENTER
-			    },
+	          mapTypeControl: false,
 			    panControl: false,
 			    zoomControl: false,
 			    streetViewControl: false,
@@ -143,6 +137,7 @@ export default Ember.View.extend({
 	        // Dark Theme
 	        google.maps.event.addDomListener(document.querySelector(".btn--dark-theme"), 'click', function(){
 			  		switchTheme(themeDark);
+			  		map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
 	        		$(this).addClass("active");
 	      	 });
 
@@ -155,12 +150,20 @@ export default Ember.View.extend({
 	        // Colorful Theme
 	        google.maps.event.addDomListener(document.querySelector(".btn--colorful-theme"), 'click', function(){
 			  		switchTheme(themeColorful);
+			  		map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
 			  		$(this).addClass("active");
 	        });
 
 	       // Neutral Theme
 	        google.maps.event.addDomListener(document.querySelector(".btn--neutral-theme"), 'click', function(){
 			  		switchTheme(themeNeutral);
+			  		map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+			  		$(this).addClass("active");
+	        });
+
+	         // Satellite Theme
+	        google.maps.event.addDomListener(document.querySelector(".btn--satellite-theme"), 'click', function(){
+			  		switchTheme("satellite");
 			  		$(this).addClass("active");
 	        });
 
@@ -170,6 +173,22 @@ export default Ember.View.extend({
 			 });
 			 google.maps.event.addDomListener(window, 'resize', function() {
 			   map.setCenter(center);
+			 });
+
+			 google.maps.event.addDomListener(document.getElementById("btn--add-location"), 'click', function() {
+			 	showControlPanel();
+			 	setTimeout(function(){
+			 		google.maps.event.trigger(map, "resize");	
+			   		map.panTo(center);
+			 	}, 750);
+			 });
+
+			 google.maps.event.addDomListener(document.getElementById("btn--close-ctrl-pnl"), 'click', function() {
+			 	hideControlPanel();
+			 	setTimeout(function(){
+			 		google.maps.event.trigger(map, "resize");	
+			   		map.panTo(center);
+			 	}, 750);
 			 });
 
 	        // Crude Add Marker
@@ -190,7 +209,7 @@ export default Ember.View.extend({
 				var addressInput = document.createElement('input');
 				addressInput.setAttribute("type", "textbox");
 				addressInput.setAttribute("id", "address");
-				addressInput.setAttribute("placeholder", "Search");
+				addressInput.setAttribute("placeholder", "I wannago to...");
 
 				// Address Button
 				var searchBtn = document.createElement('input');
@@ -205,6 +224,7 @@ export default Ember.View.extend({
 				// Results
 				geoResults = document.createElement('div');
 				geoResults.className = geoResults.className + "geocode-results";
+				geoResults.innerHTML = "<span class='results-header'>Search and start setting destinations to cities, countries, attractions or places you've always wanted to go.</span>";
 
 				// Suggestions
 				geoSuggestions = document.createElement('div');
@@ -218,12 +238,12 @@ export default Ember.View.extend({
 				geoContainer.appendChild(geoSuggestions);
 
 				// Add to map
-				map.controls[google.maps.ControlPosition.RIGHT_TOP].push(resultsPanel);
+				map.controls[google.maps.ControlPosition.LEFT_TOP].push(resultsPanel);
 
 		       ///////////////////////
 		       // Custom Zoom Controls
 				var zoomContainer = document.createElement('div');
-				zoomContainer.style.padding = "20px"; // offset from edge
+				zoomContainer.setAttribute("id", "zoom-container");
 
 				// Zoom in button
 				var zoomIn = document.createElement('div');
@@ -240,7 +260,7 @@ export default Ember.View.extend({
 				zoomContainer.appendChild(zoomOut);
 
 				// Add to map
-				map.controls[google.maps.ControlPosition.LEFT_TOP].push(zoomContainer);
+				map.controls[google.maps.ControlPosition.TOP_RIGHT].push(zoomContainer);
 
 				// Zoom Events
 				google.maps.event.addDomListener(zoomOut, 'click', function() {
@@ -283,7 +303,7 @@ export default Ember.View.extend({
 
 			      // Zoom out map
 			      map.setOptions({
-			      		zoom: 3
+			      		zoom: 13
 			      });
 
 			      ///////////
@@ -319,8 +339,18 @@ export default Ember.View.extend({
 			      };
 
 			    } else {
-			     // Alert the error
-			     alert('Geocode was not successful for the following reason: ' + status + ' You may want to try another search term.');
+			    	var alertBar = document.getElementById("alert-bar");
+
+			    	alertBar.innerHTML = "Sorry, search failed for the following reason: " + status;
+
+			    	// Apply active class
+			     	alertBar.className =  "active error";
+
+			     	// Wait 3 seconds
+			     	setTimeout(function() {
+			     		// Remove classes
+			     		alertBar.className = "";
+			     	}, 10000);
 			    }
 			  }); // end geocode
 			} // End CodeAddress
@@ -337,18 +367,26 @@ export default Ember.View.extend({
 	       // Map Theme Switcher
 	       ////////////////////////
 	        function switchTheme(theme) {
-	        		var activeBtn = $(this);
+        		var activeBtn = $(this);
 
-	        		// Set toggle buttons inactive
-	        		$(".theme-toggle").each(function(){
-	        			$(this).removeClass("active");
-	        		});
+        		// Set toggle buttons inactive
+        		$(".theme-toggle").each(function(){
+        			$(this).removeClass("active");
+        		});
 
-	        		// Set theme
-		      		map.setOptions({
-		      			styles: theme 
-		      		});	
-	        }
+        		if (theme == "satellite") {
+        			// Set to Roadmap
+        			map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+        		} else {
+        			// Set to Roadmap
+        			map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+
+        		   // Set theme
+	      			map.setOptions({
+	      				styles: theme 
+	      			});
+        		}
+	       }
 
 			///////////////////////////////////
 	      // Add Marker

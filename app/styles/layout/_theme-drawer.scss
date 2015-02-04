@@ -8,11 +8,15 @@
 	overflow-x: scroll;
 	overflow-y: hidden;
 	-webkit-overflow-scrolling: touch;
+
 	@include transition(all ease 1s);
 	@include order(1);
 
 	&.expanded {
 		height: 150px;
+	}
+	&::-webkit-scrollbar {
+ 		display: none;
 	}
 
 	@include bp($bp-small) {
@@ -26,6 +30,9 @@
 		height: 100%; width: 100%;
 		overflow-x: scroll;
 		overflow-y: hidden;
+		&::-webkit-scrollbar {
+ 		display: none;
+	}
 		li {
 			display: inline-block;
 			padding: 10px;
@@ -68,10 +75,10 @@
 	// Buttons
 	.btn--close-theme-drawer {
 		position: absolute;
-		padding: 10px 16px;
+		padding: 8px 13px;
 		background: $red;
 		color: #fff;
-		right: 0px; top: 0px;
+		right: 10px; top: 10px;
 		&:hover {
 			background: darken($red, 10%);
 			cursor: pointer;
